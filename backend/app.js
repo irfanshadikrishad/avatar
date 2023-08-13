@@ -39,7 +39,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ credentials: true, origin: "https://mern-avatar.netlify.app" }));
+app.use(cors({
+    credentials: true,
+    origin: "https://mern-avatar.netlify.app"
+}));
 app.use("/avatars", express.static(path.join(__dirname, "avatars")));
 
 connect(uri).then(() => {
@@ -48,6 +51,13 @@ connect(uri).then(() => {
     console.log(chalk.yellow(`[error] database : ${error}`));
 })
 
+app.get('/', (req, res) => {
+    User.find({}).then(data => {
+        res.status(200).json(data);
+    }).catch(error => {
+        res.status(404).json({ error: error });
+    })
+})
 app.post('/', upload.single('avatar'), async (req, res) => {
     const { name } = await req.body;
     const avatar = await req.file.filename;
