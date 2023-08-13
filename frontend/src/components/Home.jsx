@@ -38,7 +38,7 @@ export default function Home() {
         const formdata = new FormData();
         formdata.append("name", name);
         formdata.append("avatar", avatar);
-        const response = await fetch('http://localhost:3001/', {
+        const response = await fetch('https://avatar-4f5j.onrender.com/', {
             method: "POST",
             body: formdata
         })

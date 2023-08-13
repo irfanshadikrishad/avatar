@@ -29,7 +29,7 @@ export default function AvatarCard({ name, avatar, id, setRender }) {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('http://localhost:3001/delete', {
+        const response = await fetch('https://avatar-4f5j.onrender.com/delete', {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -49,7 +49,7 @@ export default function AvatarCard({ name, avatar, id, setRender }) {
     return (
         <form className="avatar__card" onSubmit={handleSubmit}>
             <img
-                src={`http://localhost:3001/avatars/${avatar}`}
+                src={`https://avatar-4f5j.onrender.com/avatars/${avatar}`}
                 alt="avatar images of the users"
                 draggable="false" />
             <p>{name}</p>
