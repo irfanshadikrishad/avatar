@@ -16,10 +16,16 @@ body {
     background-color: var(--background);
 }
 
+.container {
+    width: 60%;
+    margin: 0 auto;
+}
+
 .home {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     height: 100vh;
 }
 
@@ -54,4 +60,35 @@ body {
 .home>form>input[type="file"] {
     font-size: 1rem;
     cursor: pointer;
+}
+
+.avatars {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 3rem;
+}
+
+.avatars>a,
+.home>a {
+    text-decoration: none;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.avatar__cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.avatar__card>img {
+    width: 100%;
+}
+
+.avatar__card {
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
 }
