@@ -9,7 +9,7 @@ const userSchema = Schema({
         type: String,
         required: true
     }
-})
+}, { timestamps: true });
 
 const User = model('User', userSchema);
 
