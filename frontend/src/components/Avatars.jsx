@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import AvatarCard from "./AvatarCard";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export default function Avatars() {
     const [users, setUsers] = useState(null);
+    const [render, setRender] = useState(false);
 
     const callAvatars = async () => {
         const response = await fetch('http://localhost:3001/avatars', {
@@ -19,18 +21,20 @@ export default function Avatars() {
     }
     useEffect(() => {
         callAvatars();
-    }, [users])
+    }, [users, render])
     return (
         <div className="container">
             <div className="avatars">
-                <NavLink to="/">back</NavLink>
+                <NavLink to="/">{<ArrowBackIosIcon />}back</NavLink>
                 <div className="avatar__cards">
                     {users ?
                         users.map((user) => {
                             return <AvatarCard
                                 key={user._id}
+                                id={user._id}
                                 avatar={user.avatar}
                                 name={user.name}
+                                setRender={setRender}
                             />
                         })
                         : <img

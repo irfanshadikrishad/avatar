@@ -9,6 +9,7 @@ import path from "path";
 import ip from "ip";
 import User from "./models/user.js";
 import { fileURLToPath } from "url";
+import fs from "fs";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -47,11 +48,9 @@ connect(uri).then(() => {
     console.log(chalk.yellow(`[error] database : ${error}`));
 })
 
-
-app.get('/', (req, res) => { res.status(200).json({ message: "worked" }) });
 app.post('/', upload.single('avatar'), async (req, res) => {
     const { name } = await req.body;
-    const avatar = await req.file.path;
+    const avatar = await req.file.filename;
     console.log(avatar);
     const user = new User({
         name, avatar
@@ -69,6 +68,26 @@ app.get('/avatars', async (req, res) => {
         res.status(200).json(data);
     }).catch(error => {
         res.status(400).json({ error: error });
+    })
+})
+app.delete('/delete', async (req, res) => {
+    const { id } = await req.body;
+    User.findOne({ _id: id }).then(data => {
+        console.log(chalk.cyan(`[ok] /delete`, data));
+        const { avatar } = data;
+        fs.unlink(`${__dirname}/avatars/${avatar}`, function (err) {
+            if (err) throw err;
+            console.log(chalk.cyan(`[ok] avatar deleted locally`));
+        });
+        User.deleteOne({ _id: id }).then(data => {
+            res.status(200).json({ message: "Deleted" });
+        }).catch(error => {
+            console.log(chalk.yellow(`[error] /deleteOne : ${error}`));
+            res.status(404).json({ error: error });
+        })
+    }).catch(error => {
+        console.log(chalk.yellow(`[error] /delete : ${error}`));
+        res.status(404).json({ error: error });
     })
 })
 
