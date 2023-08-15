@@ -51,8 +51,8 @@ connect(uri).then(() => {
     console.log(chalk.yellow(`[error] database : ${error}`));
 })
 
-app.get('/', (req, res) => {
-    User.find({}).then(data => {
+app.get('/', async (req, res) => {
+    await User.find({}).then(data => {
         res.status(200).json(data);
     }).catch(error => {
         res.status(404).json({ error: error });
