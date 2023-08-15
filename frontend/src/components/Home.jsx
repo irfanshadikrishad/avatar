@@ -54,20 +54,22 @@ export default function Home() {
         }
     }
     return (
-        <div className="home">
-            <form onSubmit={handleSubmit} method="post" encType="multipart/form-data">
-                <input type="file" name="avatar"
-                    onChange={(e) => {
-                        setAvatar(e.target.files[0])
-                    }} ref={fileRef} />
-                <input value={name} type="text" name="name" placeholder="name"
-                    onChange={(e) => {
-                        setName(e.target.value)
-                    }} />
-                <input type="submit" value="Submit" />
-            </form>
-            <NavLink to="/avatars">avatars</NavLink>
-            <ToastContainer />
+        <div className="container">
+            <div className="home">
+                <form onSubmit={handleSubmit} method="post" encType="multipart/form-data">
+                    <input type="file" name="avatar"
+                        onChange={(e) => {
+                            setAvatar(e.target.files[0])
+                        }} ref={fileRef} />
+                    <input value={name} type="text" name="name" placeholder="name"
+                        onChange={(e) => {
+                            setName(e.target.value)
+                        }} />
+                    <input type="submit" value="Submit" />
+                </form>
+                <NavLink to="/avatars">avatars</NavLink>
+                <ToastContainer />
+            </div>
         </div>
     )
 }

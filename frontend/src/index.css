@@ -109,3 +109,37 @@ body {
     border: none;
     cursor: pointer;
 }
+
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .avatar__cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .avatar__cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .home>form {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .avatar__cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .avatar__cards {
+        grid-template-columns: 1fr;
+    }
+}

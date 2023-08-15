@@ -61,7 +61,6 @@ app.get('/', async (req, res) => {
 app.post('/', upload.single('avatar'), async (req, res) => {
     const { name } = await req.body;
     const avatar = await req.file.filename;
-    console.log(avatar);
     const user = new User({
         name, avatar
     });
@@ -83,13 +82,16 @@ app.get('/avatars', async (req, res) => {
 app.delete('/delete', async (req, res) => {
     const { id } = await req.body;
     User.findOne({ _id: id }).then(data => {
-        console.log(chalk.cyan(`[ok] /delete`, data));
+        console.log(chalk.cyan(`[ok] /findOne`, data));
         const { avatar } = data;
-        fs.unlink(`${__dirname}/avatars/${avatar}`, function (err) {
-            if (err) throw err;
-            console.log(chalk.cyan(`[ok] avatar deleted locally`));
-        });
         User.deleteOne({ _id: id }).then(data => {
+            fs.unlink(`${__dirname}/avatars/${avatar}`, function (err) {
+                if (err) {
+                    console.log(chalk.yellow(`[error] /delete unlink : ${err}`));
+                } else {
+                    console.log(chalk.cyan(`[ok] ${avatar} —deleted`));
+                }
+            });
             res.status(200).json({ message: "Deleted" });
         }).catch(error => {
             console.log(chalk.yellow(`[error] /deleteOne : ${error}`));
