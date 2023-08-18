@@ -8,7 +8,7 @@ export default function Avatars() {
     const [render, setRender] = useState(false);
 
     const callAvatars = async () => {
-        const response = await fetch('https://avatar-4f5j.onrender.com/avatars', {
+        const response = await fetch('https://avatar-production-5577.up.railway.app/avatars', {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

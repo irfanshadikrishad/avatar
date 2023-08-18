@@ -38,7 +38,7 @@ export default function Home() {
         const formdata = new FormData();
         formdata.append("name", name);
         formdata.append("avatar", avatar);
-        const response = await fetch('https://avatar-4f5j.onrender.com/', {
+        const response = await fetch('https://avatar-production-5577.up.railway.app/', {
             method: "POST",
             body: formdata
         })
